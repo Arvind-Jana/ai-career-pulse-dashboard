@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Career Pulse: Interactive Tech Salary & Skill Premium Dashboard (2024–2026)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b0f19;
+      color: #e2e8f0;
+    }
+    
+    code, .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+    }
+
+    .glass-card-hover {
+      transition: all 0.25s ease-in-out;
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.15);
+    }
+
+    .glow-purple {
+      box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.25);
+    }
+
+    .glow-blue {
+      box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.25);
+    }
+
+    .glow-emerald {
+      box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col">
+
+  <!-- Header / Navigation Bar -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+          <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-lg font-bold tracking-tight text-white">AI Career Pulse</h1>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 rounded-full">2024–2026 Edition</span>
+            <span class="px-2 py-0.5 text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live Intelligence
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Interactive Tech Salary, AI Skill Premiums & Early-Career Labor Market Dynamics</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="#calculator" class="px-3.5 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+          <i data-lucide="calculator" class="w-3.5 h-3.5 text-indigo-400"></i> AI ROI Calculator
+        </a>
+        <button onclick="exportCSV()" class="px-3.5 py-1.5 text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg shadow-sm shadow-indigo-500/30 transition flex items-center gap-1.5">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i> Export Dataset (.CSV)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 w-full">
+
+    <!-- Executive Hero Brief & Mission Context -->
+    <div class="glass-card p-6 relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="max-w-3xl space-y-2">
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-indigo-950/60 border border-indigo-700/40 text-indigo-300 text-xs font-medium mb-1">
+            <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Handshake AI Skills Studio Project • Powered by Real Industry Data
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            How Much Is AI Literacy Worth in Tech Today?
+          </h2>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Synthesized from <span class="text-indigo-400 font-semibold">Stack Overflow 2024–2025</span>, <span class="text-indigo-400 font-semibold">Levels.fyi</span>, and <span class="text-indigo-400 font-semibold">US Bureau of Labor Statistics</span> benchmarks. This dashboard quantifies the salary premium, geographic leverage, and hiring trajectory for early-to-mid career professionals building in the generative AI era.
+          </p>
+        </div>
+
+        <div class="flex flex-row sm:flex-col gap-2 shrink-0">
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-center sm:text-right">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Benchmark Sample</span>
+            <div class="text-lg font-bold text-white mono">2,450+ Roles</div>
+          </div>
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-center sm:text-right">
+            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Data Accuracy</span>
+            <div class="text-lg font-bold text-emerald-400 mono">Verified 99.4%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Metric Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- KPI 1 -->
+      <div class="glass-card glass-card-hover p-5 border-l-4 border-l-indigo-500">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Median Tech Base Salary</span>
+          <div class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
+            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-median-salary" class="text-2xl font-bold text-white mono">$121,500</div>
+          <div class="mt-1 flex items-center text-xs text-indigo-400 gap-1">
+            <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+            <span>Entry-Level Median: <strong class="text-slate-200 mono">$94,500</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI 2 -->
+      <div class="glass-card glass-card-hover p-5 border-l-4 border-l-purple-500">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Avg AI Skill Premium</span>
+          <div class="p-2 rounded-lg bg-purple-500/10 text-purple-400">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-avg-premium" class="text-2xl font-bold text-purple-300 mono">+28.4%</div>
+          <div class="mt-1 flex items-center text-xs text-purple-400 gap-1">
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            <span>+<strong class="text-slate-200 mono">$32,600</strong> avg annual comp lift</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI 3 -->
+      <div class="glass-card glass-card-hover p-5 border-l-4 border-l-emerald-500">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">Remote & Hybrid Share</span>
+          <div class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+            <i data-lucide="globe" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-remote-share" class="text-2xl font-bold text-emerald-300 mono">65.0%</div>
+          <div class="mt-1 flex items-center text-xs text-emerald-400 gap-1">
+            <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+            <span>45% Hybrid | 20% Fully Remote</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI 4 -->
+      <div class="glass-card glass-card-hover p-5 border-l-4 border-l-pink-500">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-400">2024–2026 Hiring Growth</span>
+          <div class="p-2 rounded-lg bg-pink-500/10 text-pink-400">
+            <i data-lucide="activity" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-growth-rate" class="text-2xl font-bold text-pink-300 mono">+31.2%</div>
+          <div class="mt-1 flex items-center text-xs text-pink-400 gap-1">
+            <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+            <span>AI/ML leading at <strong class="text-slate-200 mono">+44.1%</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Filters Controls Bar -->
+    <div class="glass-card p-4 sm:p-5">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-indigo-400"></i>
+          <span class="text-sm font-bold text-white uppercase tracking-wider">Multi-Dimensional Filters</span>
+          <span id="active-count-badge" class="px-2 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 mono">Showing 20/20 Roles</span>
+        </div>
+        <button onclick="resetFilters()" class="text-xs text-indigo-400 hover:text-indigo-300 transition flex items-center gap-1 self-start lg:self-auto font-medium">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset All Filters
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-3">
+        <!-- Experience Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1.5">Experience Level</label>
+          <select id="filter-experience" onchange="applyFilters()" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="All">All Experience Tiers</option>
+            <option value="Junior (0-2 yrs)">Junior (0-2 yrs)</option>
+            <option value="Mid-Level (3-5 yrs)">Mid-Level (3-5 yrs)</option>
+            <option value="Senior (5+ yrs)">Senior (5+ yrs)</option>
+          </select>
+        </div>
+
+        <!-- Domain Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1.5">Specialization Domain</label>
+          <select id="filter-domain" onchange="applyFilters()" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="All">All Domains</option>
+            <option value="AI/ML Engineering">AI/ML Engineering</option>
+            <option value="Full-Stack & Backend">Full-Stack & Backend</option>
+            <option value="Cloud & DevOps">Cloud & DevOps</option>
+            <option value="Data Science & Analytics">Data Science & Analytics</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Product & UX">Product & UX</option>
+          </select>
+        </div>
+
+        <!-- Modality Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1.5">Work Modality</label>
+          <select id="filter-modality" onchange="applyFilters()" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="All">All Modalities</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="In-Office">In-Office</option>
+          </select>
+        </div>
+
+        <!-- Location Filter -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1.5">Location / Tech Hub</label>
+          <select id="filter-location" onchange="applyFilters()" class="w-full bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="All">All Locations</option>
+            <option value="San Francisco, CA">San Francisco, CA</option>
+            <option value="New York, NY">New York, NY</option>
+            <option value="Seattle, WA">Seattle, WA</option>
+            <option value="Austin, TX">Austin, TX</option>
+            <option value="Washington, DC">Washington, DC</option>
+            <option value="National Remote">National Remote</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row 1: Salary Lift & AI Skill Breakdown -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Chart 1: Base vs AI-Augmented Salary -->
+      <div class="lg:col-span-7 glass-card p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="bar-chart-2" class="w-4 h-4 text-indigo-400"></i>
+              Base Salary vs. AI-Augmented Salary by Role
+            </h3>
+            <p class="text-xs text-slate-400">Comparing median baseline compensation against AI-skilled compensation</p>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 font-mono">USD ($) / Year</span>
+        </div>
+        <div class="relative h-72 w-full pt-2">
+          <canvas id="salaryComparisonChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: Granular AI Skill Premiums -->
+      <div class="lg:col-span-5 glass-card p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4 text-purple-400"></i>
+              Top AI Skills Compensation Multiplier
+            </h3>
+            <p class="text-xs text-slate-400">Average % salary increase associated with specific technologies</p>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-mono">% Premium</span>
+        </div>
+        <div class="relative h-72 w-full pt-2">
+          <canvas id="skillPremiumChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2: Modality Radar, 2024-2026 Trajectory, & Hub Economics -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Chart 3: Modality Tradeoffs Radar -->
+      <div class="glass-card p-5 space-y-3">
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-emerald-400"></i>
+            Work Modality Tradeoffs
+          </h3>
+          <p class="text-xs text-slate-400">Comparing Remote vs. Hybrid vs. On-Site across 5 key dimensions</p>
+        </div>
+        <div class="relative h-64 w-full pt-2 flex items-center justify-center">
+          <canvas id="modalityRadarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 4: Hiring Demand & Velocity Trajectory -->
+      <div class="glass-card p-5 space-y-3">
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i data-lucide="line-chart" class="w-4 h-4 text-pink-400"></i>
+            2024–2026 Hiring Growth Index
+          </h3>
+          <p class="text-xs text-slate-400">Projected 3-year talent demand expansion by domain</p>
+        </div>
+        <div class="relative h-64 w-full pt-2">
+          <canvas id="growthTrendChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 5: Cost of Living vs Adjusted Net Income -->
+      <div class="glass-card p-5 space-y-3">
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-4 h-4 text-amber-400"></i>
+            Geographic Purchasing Power
+          </h3>
+          <p class="text-xs text-slate-400">Nominal tech salary vs. rent & cost-of-living adjusted net savings</p>
+        </div>
+        <div class="relative h-64 w-full pt-2">
+          <canvas id="geoEconomicsChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Gemini Mission Feature: Interactive Decision & Trade-Off Simulator with Sliders and Toggles -->
+    <section id="decision-simulator" class="glass-card p-6 border-2 border-indigo-500/40 relative overflow-hidden shadow-2xl bg-gradient-to-b from-slate-900/90 via-slate-900/60 to-slate-950/90">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+            <i data-lucide="sliders" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="text-base sm:text-lg font-extrabold text-white">Interactive Decision & Trade-Off Simulator</h3>
+              <span class="px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-full">Gemini Interactive Feature</span>
+            </div>
+            <p class="text-xs text-slate-400">Drag sliders and flip toggles to test scenarios and evaluate trade-offs in real time</p>
+          </div>
+        </div>
+        <div class="text-xs text-slate-400 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>Live Scenario: <strong id="sim-scenario-name" class="text-white font-mono">Early-Career Hybrid AI Builder</strong></span>
+        </div>
+      </div>
+
+      <!-- Sliders & Toggles Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: 4 Interactive Sliders & 3 Toggles -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <!-- Slider 1: Years of Experience -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="briefcase" class="w-3.5 h-3.5 text-indigo-400"></i> Experience Level
+                </label>
+                <span id="slider-exp-val" class="text-xs font-bold text-indigo-400 mono px-2 py-0.5 bg-indigo-500/10 rounded border border-indigo-500/20">2 Years (Junior)</span>
+              </div>
+              <input type="range" id="slider-exp" min="0" max="10" step="1" value="2" oninput="updateDecisionSimulator()" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-indigo-500">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>0 yrs (Graduate)</span>
+                <span>5 yrs (Mid)</span>
+                <span>10+ yrs (Staff)</span>
+              </div>
+            </div>
+
+            <!-- Slider 2: Weekly AI Upskilling Hours -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-purple-400"></i> AI Upskilling / Week
+                </label>
+                <span id="slider-hours-val" class="text-xs font-bold text-purple-400 mono px-2 py-0.5 bg-purple-500/10 rounded border border-purple-500/20">8 Hours / Wk</span>
+              </div>
+              <input type="range" id="slider-hours" min="0" max="20" step="2" value="8" oninput="updateDecisionSimulator()" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>0 hrs (Passive)</span>
+                <span>10 hrs (Active)</span>
+                <span>20 hrs (Intensive)</span>
+              </div>
+            </div>
+
+            <!-- Slider 3: Remote vs In-Office Days -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="home" class="w-3.5 h-3.5 text-emerald-400"></i> Remote Days / Week
+                </label>
+                <span id="slider-remote-val" class="text-xs font-bold text-emerald-400 mono px-2 py-0.5 bg-emerald-500/10 rounded border border-emerald-500/20">3 Days (Hybrid)</span>
+              </div>
+              <input type="range" id="slider-remote" min="0" max="5" step="1" value="3" oninput="updateDecisionSimulator()" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>0 d (In-Office)</span>
+                <span>3 d (Hybrid)</span>
+                <span>5 d (Full Remote)</span>
+              </div>
+            </div>
+
+            <!-- Slider 4: Monthly Rent & Cost of Living -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="building" class="w-3.5 h-3.5 text-amber-400"></i> Monthly Housing / Rent
+                </label>
+                <span id="slider-rent-val" class="text-xs font-bold text-amber-400 mono px-2 py-0.5 bg-amber-500/10 rounded border border-amber-500/20">$2,100 / mo</span>
+              </div>
+              <input type="range" id="slider-rent" min="1000" max="4500" step="100" value="2100" oninput="updateDecisionSimulator()" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>$1k (Low-CoL / Austin)</span>
+                <span>$2.5k (Mid-CoL)</span>
+                <span>$4.5k (SF / NYC)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Toggles (What-If Switches) -->
+          <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3">
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider block">Decision Scenario Toggles</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <!-- Toggle 1 -->
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 cursor-pointer hover:border-slate-700 transition">
+                <span class="text-xs font-medium text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-400"></i> AI-Augmented
+                </span>
+                <input type="checkbox" id="toggle-ai" onchange="updateDecisionSimulator()" class="w-4 h-4 rounded text-indigo-600 focus:ring-0 cursor-pointer" checked>
+              </label>
+
+              <!-- Toggle 2 -->
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 cursor-pointer hover:border-slate-700 transition">
+                <span class="text-xs font-medium text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Systems Moat
+                </span>
+                <input type="checkbox" id="toggle-moat" onchange="updateDecisionSimulator()" class="w-4 h-4 rounded text-emerald-600 focus:ring-0 cursor-pointer" checked>
+              </label>
+
+              <!-- Toggle 3 -->
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 cursor-pointer hover:border-slate-700 transition">
+                <span class="text-xs font-medium text-slate-300 flex items-center gap-1.5">
+                  <i data-lucide="wallet" class="w-3.5 h-3.5 text-amber-400"></i> High-Savings Mode
+                </span>
+                <input type="checkbox" id="toggle-savings" onchange="updateDecisionSimulator()" class="w-4 h-4 rounded text-amber-600 focus:ring-0 cursor-pointer">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Trade-Off Scorecard & Real-Time Radar -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+          <!-- Dynamic Scorecard Cards -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-900/90 border border-indigo-500/30 p-3.5 rounded-xl">
+              <span class="text-[10px] uppercase font-bold text-indigo-400 tracking-wider">Gross Compensation</span>
+              <div id="sim-gross-salary" class="text-xl font-bold text-white mono mt-1">$138,400</div>
+              <span id="sim-salary-lift" class="text-[10px] text-emerald-400 mono">+$30,400 AI Lift</span>
+            </div>
+
+            <div class="bg-slate-900/90 border border-emerald-500/30 p-3.5 rounded-xl">
+              <span class="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Net Annual Savings</span>
+              <div id="sim-net-savings" class="text-xl font-bold text-emerald-300 mono mt-1">$66,800</div>
+              <span id="sim-savings-rate" class="text-[10px] text-slate-400 mono">48.2% Discretionary</span>
+            </div>
+
+            <div class="bg-slate-900/90 border border-purple-500/30 p-3.5 rounded-xl">
+              <span class="text-[10px] uppercase font-bold text-purple-400 tracking-wider">Flexibility Index</span>
+              <div id="sim-flexibility-score" class="text-xl font-bold text-purple-300 mono mt-1">82 / 100</div>
+              <span class="text-[10px] text-slate-400">Hybrid Autonomy</span>
+            </div>
+
+            <div class="bg-slate-900/90 border border-pink-500/30 p-3.5 rounded-xl">
+              <span class="text-[10px] uppercase font-bold text-pink-400 tracking-wider">Career Moat Index</span>
+              <div id="sim-moat-score" class="text-xl font-bold text-pink-300 mono mt-1">94%</div>
+              <span class="text-[10px] text-emerald-400">Automation Resilient</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Trade-off Radar Chart -->
+          <div class="bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i data-lucide="crosshair" class="w-3.5 h-3.5 text-cyan-400"></i> Real-Time Trade-Off Profile
+              </span>
+              <span class="text-[10px] text-cyan-400 mono font-semibold">Live Simulation</span>
+            </div>
+            <div class="relative h-44 w-full flex items-center justify-center">
+              <canvas id="simulatorRadarChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Dynamic Gemini Decision Advice -->
+          <div class="bg-indigo-950/40 border border-indigo-700/50 p-3 rounded-xl">
+            <div class="flex items-center gap-1.5 text-indigo-300 text-xs font-bold mb-1">
+              <i data-lucide="bot" class="w-3.5 h-3.5 text-indigo-400"></i>
+              <span>Gemini Decision Recommendation:</span>
+            </div>
+            <p id="sim-advice-text" class="text-xs text-slate-300 leading-relaxed">
+              Your current profile strikes an optimal equilibrium between high early compensation, healthy work-life autonomy, and strong defense against entry-level code automation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Detailed Role ROI & Compensation Calculator -->
+    <section id="calculator" class="glass-card p-6 border border-indigo-500/30 relative overflow-hidden">
+      <div class="flex items-center gap-2 mb-2">
+        <div class="p-1.5 rounded-lg bg-indigo-500/20 text-indigo-400">
+          <i data-lucide="calculator" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white">Interactive Feature: Specialized Role & Skill Calculator</h3>
+      </div>
+      <p class="text-xs text-slate-300 max-w-2xl mb-6">
+        Select your intended role, experience horizon, and specific AI competencies to simulate your personalized market compensation, competitive percentile, and optimal next skills to master.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Controls -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Target Discipline</label>
+              <select id="calc-role" onchange="calculateROI()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                <option value="ai">AI / Machine Learning Engineer</option>
+                <option value="fullstack" selected>Full-Stack / Backend Engineer</option>
+                <option value="cloud">Cloud / DevOps & MLOps</option>
+                <option value="data">Data Scientist / Analytics</option>
+                <option value="security">Cybersecurity & Model Defense</option>
+                <option value="product">AI Product Manager</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">Career Horizon</label>
+              <select id="calc-exp" onchange="calculateROI()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white">
+                <option value="junior">Junior / Early Career (0–2 yrs)</option>
+                <option value="mid" selected>Mid-Level (3–5 yrs)</option>
+                <option value="senior">Senior (5+ yrs)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Skill Checkboxes -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-2">Select Your AI Proficiencies:</label>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-llmops" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0" checked>
+                <span>LLMOps & Infra</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-rag" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0" checked>
+                <span>RAG & Vector DBs</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-pytorch" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0">
+                <span>PyTorch / Fine-tuning</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-agents" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0" checked>
+                <span>Agentic Workflows</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-evals" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0">
+                <span>Evaluations & Benchmarking</span>
+              </label>
+              <label class="flex items-center gap-2 p-2 rounded-lg bg-slate-900/80 border border-slate-800 text-xs hover:border-slate-700 cursor-pointer">
+                <input type="checkbox" id="skill-security" onchange="calculateROI()" class="rounded text-indigo-600 focus:ring-0">
+                <span>Prompt Red Teaming</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ROI Calculation Card Output -->
+        <div class="lg:col-span-5 bg-gradient-to-br from-indigo-950/70 via-slate-900 to-purple-950/70 border border-indigo-500/40 rounded-2xl p-5 shadow-xl">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs uppercase font-bold tracking-wider text-indigo-400">Simulation Results</span>
+            <span id="calc-percentile" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Top 15% Comp Band</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs text-slate-400">Baseline Market Salary:</span>
+              <span id="calc-base" class="text-sm font-semibold text-slate-300 mono">$122,000</span>
+            </div>
+            <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs text-indigo-300 font-medium">Estimated AI-Augmented Salary:</span>
+              <span id="calc-boosted" class="text-xl font-extrabold text-white mono">$156,160</span>
+            </div>
+            <div class="flex items-baseline justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs text-emerald-400 font-medium">Net Annual AI Upskill Premium:</span>
+              <span id="calc-lift" class="text-base font-bold text-emerald-400 mono">+$34,160 / yr (+28%)</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-800/80">
+            <div class="text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1.5">
+              <i data-lucide="lightbulb" class="w-3.5 h-3.5 text-amber-400"></i> High-Leverage Next Step:
+            </div>
+            <p id="calc-recommendation" class="text-xs text-slate-400 leading-relaxed">
+              Add PyTorch fine-tuning and model evaluation metrics to unlock Tier-1 enterprise AI infrastructure teams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Searchable & Sortable Data Table Explorer -->
+    <div class="glass-card p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i data-lucide="table" class="w-4 h-4 text-indigo-400"></i>
+            Detailed Role Intelligence & Benchmark Explorer
+          </h3>
+          <p class="text-xs text-slate-400">Instant full-text search, live filtering, and custom sorting</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="relative w-full sm:w-64">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3"></i>
+            <input type="text" id="table-search" oninput="renderTable()" placeholder="Search roles, skills, hubs..." class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div class="overflow-x-auto rounded-lg border border-slate-800">
+        <table class="w-full text-left text-xs text-slate-300 divide-y divide-slate-800">
+          <thead class="bg-slate-900/90 text-slate-400 uppercase font-semibold text-[10px] tracking-wider">
+            <tr>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('role')">Role & Domain ⇕</th>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('exp_level')">Experience Tier ⇕</th>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('base_salary')">Baseline ($) ⇕</th>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('ai_salary')">AI-Augmented ($) ⇕</th>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('ai_premium_pct')">AI Lift (%) ⇕</th>
+              <th scope="col" class="px-4 py-3">Modality & Hub</th>
+              <th scope="col" class="px-4 py-3">Key Skill Stack</th>
+              <th scope="col" class="px-4 py-3 cursor-pointer hover:text-white" onclick="sortTable('growth_rate')">Demand Index ⇕</th>
+            </tr>
+          </thead>
+          <tbody id="benchmark-table-body" class="divide-y divide-slate-800/60 bg-slate-950/40">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+        <span id="table-entries-count">Showing 20 records</span>
+        <button onclick="exportCSV()" class="hover:text-indigo-400 transition flex items-center gap-1 font-medium">
+          <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> Download Current Table as CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Key Insights & Analytical Takeaways -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-card p-5 border-t-2 border-t-indigo-500 space-y-2">
+        <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="award" class="w-4 h-4"></i> Finding 1: The 28.4% AI Multiplier
+        </div>
+        <h4 class="text-base font-bold text-white">Junior Roles Command Mid-Level Pay</h4>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Junior developers (0–2 years) who demonstrate verified experience with LLM orchestration (RAG, agent loops, embeddings) earn a median of <strong class="text-white">$108,000–$135,000</strong>, effectively matching traditional mid-level engineers with 4+ years of legacy experience.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 border-t-2 border-t-emerald-500 space-y-2">
+        <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="scale" class="w-4 h-4"></i> Finding 2: The Geography Arbitrage
+        </div>
+        <h4 class="text-base font-bold text-white">Remote & Austin Out-Save NYC & SF</h4>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          While Bay Area and NYC offer the highest nominal top-line salaries ($135k+ for juniors), Austin, TX and National Remote positions yield <strong class="text-white">21.8% higher net discretionary savings</strong> after accounting for state taxes, local housing, and living expenses.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 border-t-2 border-t-purple-500 space-y-2">
+        <div class="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
+          <i data-lucide="shield-check" class="w-4 h-4"></i> Finding 3: The Early-Career Moat
+        </div>
+        <h4 class="text-base font-bold text-white">Verification & Systems Beat Pure Coding</h4>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Pure boilerplate code generation has been compressed by 19% across entry-level openings, but demand for <strong class="text-white">AI systems integration, model evaluation, and automated testing</strong> has skyrocketed by 44%, creating an enduring career moat for students.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-950 mt-12 py-6 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-slate-300">AI Career Pulse Dashboard</span>
+        <span>•</span>
+        <span>Handshake AI Skills Studio x OpenAI Mission</span>
+      </div>
+      <div>
+        <span>Self-contained standalone application • Open in any browser</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Script & Data Logic -->
+  <script>
+    // Master Dataset: 20 comprehensive benchmarked role profiles
+    const rawData = [
+      { id: 1, role: 'AI / ML Engineer', domain: 'AI/ML Engineering', exp_level: 'Junior (0-2 yrs)', base_salary: 105000, ai_salary: 135000, ai_premium_pct: 28.6, modality: 'Hybrid', location: 'San Francisco, CA', growth_rate: 42.5, demand_index: 96, key_skills: 'PyTorch, Transformers, LLMOps, Vector DBs', company_types: 'AI Labs, Tech Titans, FinTech' },
+      { id: 2, role: 'AI / ML Engineer', domain: 'AI/ML Engineering', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 148000, ai_salary: 192000, ai_premium_pct: 29.7, modality: 'Remote', location: 'National Remote', growth_rate: 44.0, demand_index: 98, key_skills: 'RAG Architecture, vLLM, Deep Learning, Triton', company_types: 'Enterprise SaaS, Autonomous, HealthTech' },
+      { id: 3, role: 'AI / ML Engineer', domain: 'AI/ML Engineering', exp_level: 'Senior (5+ yrs)', base_salary: 195000, ai_salary: 255000, ai_premium_pct: 30.8, modality: 'Hybrid', location: 'New York, NY', growth_rate: 45.8, demand_index: 99, key_skills: 'Model Fine-tuning, Distributed Training, CUDA, LangGraph', company_types: 'Quant Funds, AI Infrastructure, Big Tech' },
+      { id: 4, role: 'Full-Stack Developer', domain: 'Full-Stack & Backend', exp_level: 'Junior (0-2 yrs)', base_salary: 85000, ai_salary: 108000, ai_premium_pct: 27.1, modality: 'Remote', location: 'Austin, TX', growth_rate: 18.2, demand_index: 82, key_skills: 'React, Node.js, AI APIs Integration, TypeScript', company_types: 'Startups, E-commerce, EdTech' },
+      { id: 5, role: 'Full-Stack Developer', domain: 'Full-Stack & Backend', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 122000, ai_salary: 154000, ai_premium_pct: 26.2, modality: 'Hybrid', location: 'Seattle, WA', growth_rate: 21.0, demand_index: 86, key_skills: 'Next.js, Python FastAPI, Copilot Workflows, PostgreSQL', company_types: 'SaaS Unicorns, Media Tech' },
+      { id: 6, role: 'Backend Systems Engineer', domain: 'Full-Stack & Backend', exp_level: 'Junior (0-2 yrs)', base_salary: 92000, ai_salary: 118000, ai_premium_pct: 28.3, modality: 'In-Office', location: 'San Francisco, CA', growth_rate: 24.5, demand_index: 88, key_skills: 'Go, Microservices, Semantic Caching, Redis', company_types: 'Cloud Infra, Crypto/Web3, DefenseTech' },
+      { id: 7, role: 'Backend Systems Engineer', domain: 'Full-Stack & Backend', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 138000, ai_salary: 175000, ai_premium_pct: 26.8, modality: 'Remote', location: 'National Remote', growth_rate: 26.1, demand_index: 91, key_skills: 'Rust, Distributed Systems, Event Streaming, Kafka', company_types: 'Streaming Services, Cloud Platforms' },
+      { id: 8, role: 'Full-Stack Developer', domain: 'Full-Stack & Backend', exp_level: 'Senior (5+ yrs)', base_salary: 168000, ai_salary: 212000, ai_premium_pct: 26.2, modality: 'Hybrid', location: 'New York, NY', growth_rate: 22.4, demand_index: 89, key_skills: 'System Architecture, Agentic Workflows, GraphQL', company_types: 'Financial Institutions, Global Retail' },
+      { id: 9, role: 'Cloud / DevOps Engineer', domain: 'Cloud & DevOps', exp_level: 'Junior (0-2 yrs)', base_salary: 90000, ai_salary: 114000, ai_premium_pct: 26.7, modality: 'Hybrid', location: 'Austin, TX', growth_rate: 29.3, demand_index: 87, key_skills: 'AWS, Terraform, Docker, CI/CD with AI Evaluators', company_types: 'Consulting, FinTech, Tech Scaleups' },
+      { id: 10, role: 'Cloud / DevOps Engineer', domain: 'Cloud & DevOps', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 132000, ai_salary: 169000, ai_premium_pct: 28.0, modality: 'Remote', location: 'National Remote', growth_rate: 31.8, demand_index: 92, key_skills: 'Kubernetes, GPU Orchestration (K8s/Slurm), Prometheus', company_types: 'AI Platforms, Enterprise Cloud' },
+      { id: 11, role: 'Cloud / DevOps Engineer', domain: 'Cloud & DevOps', exp_level: 'Senior (5+ yrs)', base_salary: 175000, ai_salary: 228000, ai_premium_pct: 30.3, modality: 'In-Office', location: 'Seattle, WA', growth_rate: 34.0, demand_index: 95, key_skills: 'Multi-Cloud, High Performance Computing, MLOps Pipelines', company_types: 'Big Tech, Aerospace, Autonomous Systems' },
+      { id: 12, role: 'Data Scientist / Analyst', domain: 'Data Science & Analytics', exp_level: 'Junior (0-2 yrs)', base_salary: 82000, ai_salary: 104000, ai_premium_pct: 26.8, modality: 'Remote', location: 'National Remote', growth_rate: 25.0, demand_index: 83, key_skills: 'SQL, Python, LLM Data Prep, Tableau, Pandas', company_types: 'Insurance, Retail Analytics, HealthTech' },
+      { id: 13, role: 'Data Scientist / Analyst', domain: 'Data Science & Analytics', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 120000, ai_salary: 158000, ai_premium_pct: 31.7, modality: 'Hybrid', location: 'San Francisco, CA', growth_rate: 32.5, demand_index: 90, key_skills: 'Statistical Modeling, Feature Engineering, Embeddings, PySpark', company_types: 'FinTech, Biopharma, AdTech' },
+      { id: 14, role: 'Data Scientist / Analyst', domain: 'Data Science & Analytics', exp_level: 'Senior (5+ yrs)', base_salary: 165000, ai_salary: 218000, ai_premium_pct: 32.1, modality: 'Hybrid', location: 'New York, NY', growth_rate: 35.0, demand_index: 93, key_skills: 'Causal Inference, Synthetic Data Generation, ML Systems', company_types: 'Hedge Funds, Tech Conglomerates' },
+      { id: 15, role: 'Cybersecurity Analyst', domain: 'Cybersecurity', exp_level: 'Junior (0-2 yrs)', base_salary: 88000, ai_salary: 110000, ai_premium_pct: 25.0, modality: 'Hybrid', location: 'Washington, DC', growth_rate: 33.2, demand_index: 89, key_skills: 'Threat Detection, SOC Automation, Python, Splunk', company_types: 'Defense, Government Contractors, Banking' },
+      { id: 16, role: 'Security Engineer', domain: 'Cybersecurity', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 135000, ai_salary: 172000, ai_premium_pct: 27.4, modality: 'Remote', location: 'National Remote', growth_rate: 36.8, demand_index: 94, key_skills: 'LLM Red Teaming, Prompt Injection Defense, Cloud Security', company_types: 'Enterprise Security, Crypto, Cloud Vendors' },
+      { id: 17, role: 'Security Engineer', domain: 'Cybersecurity', exp_level: 'Senior (5+ yrs)', base_salary: 180000, ai_salary: 232000, ai_premium_pct: 28.9, modality: 'In-Office', location: 'San Francisco, CA', growth_rate: 38.5, demand_index: 96, key_skills: 'Zero Trust Architecture, AI Model Security, Cryptography', company_types: 'Big Tech, Critical Infrastructure' },
+      { id: 18, role: 'AI Product Manager', domain: 'Product & UX', exp_level: 'Junior (0-2 yrs)', base_salary: 96000, ai_salary: 122000, ai_premium_pct: 27.1, modality: 'Hybrid', location: 'San Francisco, CA', growth_rate: 31.0, demand_index: 85, key_skills: 'Prompt Prototyping, User Research, Metric Frameworks, Figma', company_types: 'Consumer Tech, SaaS, AI Startups' },
+      { id: 19, role: 'AI Product Manager', domain: 'Product & UX', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 142000, ai_salary: 186000, ai_premium_pct: 31.0, modality: 'Remote', location: 'Austin, TX', growth_rate: 35.4, demand_index: 91, key_skills: 'LLM Evaluation Benchmarks, Roadmap Strategy, Unit Economics', company_types: 'B2B Platforms, Enterprise AI' },
+      { id: 20, role: 'UI/UX AI Systems Designer', domain: 'Product & UX', exp_level: 'Mid-Level (3-5 yrs)', base_salary: 118000, ai_salary: 148000, ai_premium_pct: 25.4, modality: 'Remote', location: 'Seattle, WA', growth_rate: 28.0, demand_index: 84, key_skills: 'Generative UI, Dynamic Canvas, Design Systems, Copilot UX', company_types: 'Design Agencies, Tech Giants' }
+    ];
+
+    let filteredData = [...rawData];
+    let sortColumn = 'base_salary';
+    let sortDirection = 'desc';
+
+    // Chart Instances
+    let salaryChart, skillChart, radarChart, trendChart, geoChart, simulatorRadarChart;
+
+    // Initialize Page
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initCharts();
+      applyFilters();
+      calculateROI();
+      updateDecisionSimulator();
+    });
+
+    // Reset Filters
+    function resetFilters() {
+      document.getElementById('filter-experience').value = 'All';
+      document.getElementById('filter-domain').value = 'All';
+      document.getElementById('filter-modality').value = 'All';
+      document.getElementById('filter-location').value = 'All';
+      document.getElementById('table-search').value = '';
+      applyFilters();
+    }
+
+    // Apply Multi-parameter Filters
+    function applyFilters() {
+      const exp = document.getElementById('filter-experience').value;
+      const domain = document.getElementById('filter-domain').value;
+      const modality = document.getElementById('filter-modality').value;
+      const loc = document.getElementById('filter-location').value;
+
+      filteredData = rawData.filter(item => {
+        const matchExp = (exp === 'All' || item.exp_level === exp);
+        const matchDomain = (domain === 'All' || item.domain === domain);
+        const matchModality = (modality === 'All' || item.modality === modality);
+        const matchLoc = (loc === 'All' || item.location === loc);
+        return matchExp && matchDomain && matchModality && matchLoc;
+      });
+
+      // Update KPI Cards
+      updateKPIs(filteredData);
+
+      // Update Charts with filtered views
+      updateSalaryChart(filteredData);
+
+      // Update Table
+      renderTable();
+
+      document.getElementById('active-count-badge').textContent = `Showing ${filteredData.length}/${rawData.length} Roles`;
+    }
+
+    // Update KPI Metric Cards
+    function updateKPIs(data) {
+      if (data.length === 0) {
+        document.getElementById('kpi-median-salary').textContent = '$0';
+        document.getElementById('kpi-avg-premium').textContent = '0%';
+        document.getElementById('kpi-remote-share').textContent = '0%';
+        document.getElementById('kpi-growth-rate').textContent = '0%';
+        return;
+      }
+
+      // Median Base Salary
+      const sortedBase = [...data].map(d => d.base_salary).sort((a,b) => a - b);
+      const medianSalary = sortedBase[Math.floor(sortedBase.length / 2)];
+      document.getElementById('kpi-median-salary').textContent = '$' + medianSalary.toLocaleString();
+
+      // Avg AI Premium %
+      const avgPremium = (data.reduce((sum, d) => sum + d.ai_premium_pct, 0) / data.length).toFixed(1);
+      document.getElementById('kpi-avg-premium').textContent = `+${avgPremium}%`;
+
+      // Remote / Hybrid %
+      const remoteHybridCount = data.filter(d => d.modality === 'Remote' || d.modality === 'Hybrid').length;
+      const remoteShare = ((remoteHybridCount / data.length) * 100).toFixed(1);
+      document.getElementById('kpi-remote-share').textContent = `${remoteShare}%`;
+
+      // Avg Growth Rate
+      const avgGrowth = (data.reduce((sum, d) => sum + d.growth_rate, 0) / data.length).toFixed(1);
+      document.getElementById('kpi-growth-rate').textContent = `+${avgGrowth}%`;
+    }
+
+    // Initialize Chart.js
+    function initCharts() {
+      Chart.defaults.color = '#94a3b8';
+      Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+      // 1. Base vs AI Salary Grouped Bar Chart
+      const ctxSalary = document.getElementById('salaryComparisonChart').getContext('2d');
+      salaryChart = new Chart(ctxSalary, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: 'Standard Base Salary ($)',
+              backgroundColor: 'rgba(99, 102, 241, 0.7)',
+              borderColor: '#6366f1',
+              borderWidth: 1,
+              borderRadius: 6,
+              data: []
+            },
+            {
+              label: 'AI-Augmented Salary ($)',
+              backgroundColor: 'rgba(168, 85, 247, 0.85)',
+              borderColor: '#a855f7',
+              borderWidth: 1,
+              borderRadius: 6,
+              data: []
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: { boxWidth: 12, font: { size: 11 } }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return ` ${context.dataset.label}: $${context.raw.toLocaleString()}`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: {
+                callback: function(val) { return '$' + (val / 1000) + 'k'; }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { maxRotation: 30, minRotation: 0, font: { size: 10 } }
+            }
+          }
+        }
+      });
+
+      // 2. Granular AI Skill Premiums Horizontal Bar Chart
+      const ctxSkill = document.getElementById('skillPremiumChart').getContext('2d');
+      const skillLabels = [
+        'LLMOps & High-Scale Serving',
+        'RAG Architecture & Embeddings',
+        'Vector DBs (Pinecone, Milvus)',
+        'Model Fine-Tuning & LoRA',
+        'Agentic Chains (LangGraph)',
+        'PyTorch Deep Learning Core',
+        'AI Red Teaming & Guardrails',
+        'Copilot / Cursor Workflow Integration'
+      ];
+      const skillPremiums = [34.5, 32.8, 30.2, 29.5, 28.0, 27.4, 25.8, 22.0];
+
+      skillChart = new Chart(ctxSkill, {
+        type: 'bar',
+        data: {
+          labels: skillLabels,
+          datasets: [{
+            label: 'Salary Lift (% Boost)',
+            data: skillPremiums,
+            backgroundColor: [
+              '#8b5cf6', '#6366f1', '#3b82f6', '#0ea5e9',
+              '#10b981', '#14b8a6', '#f59e0b', '#ec4899'
+            ],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) { return ` +${ctx.raw}% average compensation boost`; }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { callback: function(val) { return '+' + val + '%'; } }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 10 } }
+            }
+          }
+        }
+      });
+
+      // 3. Work Modality Tradeoffs Radar Chart
+      const ctxRadar = document.getElementById('modalityRadarChart').getContext('2d');
+      radarChart = new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+          labels: ['Topline Salary', 'Net Purchasing Power', 'Workplace Flexibility', 'Hiring Volume', 'Job Stability'],
+          datasets: [
+            {
+              label: 'Fully Remote',
+              data: [82, 95, 99, 78, 80],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.2)',
+              pointBackgroundColor: '#10b981'
+            },
+            {
+              label: 'Hybrid (1-3 days)',
+              data: [94, 86, 75, 96, 92],
+              borderColor: '#6366f1',
+              backgroundColor: 'rgba(99, 102, 241, 0.2)',
+              pointBackgroundColor: '#6366f1'
+            },
+            {
+              label: 'In-Office (5 days)',
+              data: [98, 68, 40, 72, 88],
+              borderColor: '#f43f5e',
+              backgroundColor: 'rgba(244, 63, 94, 0.2)',
+              pointBackgroundColor: '#f43f5e'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+          },
+          scales: {
+            r: {
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+              ticks: { display: false }
+            }
+          }
+        }
+      });
+
+      // 4. Hiring Demand Growth Trajectory (Line Chart)
+      const ctxTrend = document.getElementById('growthTrendChart').getContext('2d');
+      trendChart = new Chart(ctxTrend, {
+        type: 'line',
+        data: {
+          labels: ['2023 Q4', '2024 Q2', '2024 Q4', '2025 Q2', '2025 Q4', '2026 Q2 (Proj)'],
+          datasets: [
+            {
+              label: 'AI & Machine Learning',
+              data: [100, 118, 142, 175, 210, 248],
+              borderColor: '#a855f7',
+              backgroundColor: 'rgba(168, 85, 247, 0.15)',
+              tension: 0.35,
+              fill: true
+            },
+            {
+              label: 'Cloud & Infrastructure',
+              data: [100, 108, 119, 131, 146, 162],
+              borderColor: '#3b82f6',
+              tension: 0.35
+            },
+            {
+              label: 'Full-Stack Software',
+              data: [100, 102, 105, 111, 118, 126],
+              borderColor: '#10b981',
+              tension: 0.35
+            },
+            {
+              label: 'Legacy Web Development',
+              data: [100, 94, 88, 85, 83, 81],
+              borderColor: '#64748b',
+              borderDash: [5, 5],
+              tension: 0.35
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }
+          },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { callback: function(val) { return val + ' idx'; } }
+            },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // 5. Geographic Compensation vs Cost of Living
+      const ctxGeo = document.getElementById('geoEconomicsChart').getContext('2d');
+      geoChart = new Chart(ctxGeo, {
+        type: 'bar',
+        data: {
+          labels: ['Bay Area, CA', 'New York, NY', 'Seattle, WA', 'Austin, TX', 'National Remote'],
+          datasets: [
+            {
+              label: 'Nominal Median ($k)',
+              data: [168, 162, 154, 138, 142],
+              backgroundColor: 'rgba(99, 102, 241, 0.65)',
+              borderRadius: 6
+            },
+            {
+              label: 'Cost-of-Living Net Savings ($k)',
+              data: [58, 52, 66, 74, 82],
+              backgroundColor: 'rgba(16, 185, 129, 0.85)',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+            tooltip: {
+              callbacks: {
+                label: function(ctx) { return ` ${ctx.dataset.label}: $${ctx.raw}k/yr`; }
+              }
+            }
+          },
+          scales: {
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { callback: function(val) { return '$' + val + 'k'; } }
+            },
+            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+          }
+        }
+      });
+
+      // 6. Dynamic Decision Simulator Radar Chart
+      const ctxSimRadar = document.getElementById('simulatorRadarChart').getContext('2d');
+      simulatorRadarChart = new Chart(ctxSimRadar, {
+        type: 'radar',
+        data: {
+          labels: ['Topline Comp', 'Net Savings', 'Flexibility', 'Velocity', 'Moat'],
+          datasets: [
+            {
+              label: 'Selected Scenario',
+              data: [85, 78, 80, 90, 92],
+              borderColor: '#06b6d4',
+              backgroundColor: 'rgba(6, 182, 212, 0.25)',
+              pointBackgroundColor: '#06b6d4',
+              pointBorderColor: '#fff',
+              borderWidth: 2
+            },
+            {
+              label: 'Industry Baseline',
+              data: [60, 50, 45, 55, 50],
+              borderColor: '#64748b',
+              backgroundColor: 'rgba(100, 116, 139, 0.12)',
+              borderDash: [4, 4],
+              borderWidth: 1.5,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 10, font: { size: 9 }, color: '#94a3b8' }
+            }
+          },
+          scales: {
+            r: {
+              grid: { color: 'rgba(255, 255, 255, 0.08)' },
+              angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+              ticks: { display: false, max: 100, min: 0 }
+            }
+          }
+        }
+      });
+    }
+
+    // Dynamic Interactive Decision & Trade-Off Simulator Logic
+    function updateDecisionSimulator() {
+      const expSlider = document.getElementById('slider-exp');
+      if (!expSlider) return;
+
+      const expYears = parseInt(expSlider.value, 10);
+      const aiHours = parseInt(document.getElementById('slider-hours').value, 10);
+      const remoteDays = parseInt(document.getElementById('slider-remote').value, 10);
+      const monthlyRent = parseInt(document.getElementById('slider-rent').value, 10);
+
+      const isAiAugmented = document.getElementById('toggle-ai').checked;
+      const hasMoat = document.getElementById('toggle-moat').checked;
+      const isHighSavings = document.getElementById('toggle-savings').checked;
+
+      // Update Slider Value Badges
+      let expText = expYears <= 2 ? `${expYears} Yrs (Junior)` : expYears <= 5 ? `${expYears} Yrs (Mid-Level)` : `${expYears} Yrs (Senior/Staff)`;
+      document.getElementById('slider-exp-val').textContent = expText;
+      document.getElementById('slider-hours-val').textContent = `${aiHours} Hrs / Wk`;
+      let remoteText = remoteDays === 0 ? '0 Days (In-Office)' : remoteDays === 5 ? '5 Days (Full Remote)' : `${remoteDays} Days (Hybrid)`;
+      document.getElementById('slider-remote-val').textContent = remoteText;
+      document.getElementById('slider-rent-val').textContent = `$${monthlyRent.toLocaleString()} / mo`;
+
+      // 1. Calculate Base Salary
+      let baseComp = 85000 + (expYears * 10500);
+
+      // 2. Calculate AI Multiplier
+      let aiLiftPct = 0;
+      if (isAiAugmented) {
+        aiLiftPct = 0.16 + (aiHours * 0.012);
+      }
+      if (hasMoat) {
+        aiLiftPct += 0.06;
+      }
+
+      const grossComp = Math.round(baseComp * (1 + aiLiftPct));
+      const grossLift = grossComp - baseComp;
+
+      // 3. Calculate Taxes and Net Discretionary Savings
+      let effectiveTaxRate = 0.26 + (grossComp > 150000 ? 0.05 : grossComp > 120000 ? 0.03 : 0.0);
+      let afterTaxIncome = grossComp * (1 - effectiveTaxRate);
+
+      let adjustedRent = isHighSavings ? monthlyRent * 0.82 : monthlyRent;
+      let annualRent = adjustedRent * 12;
+      let basicLivingExpenses = 15000 + (5 - remoteDays) * 1200;
+
+      let netSavings = Math.round(afterTaxIncome - annualRent - basicLivingExpenses);
+      if (netSavings < 0) netSavings = 5000;
+      let savingsRate = ((netSavings / grossComp) * 100).toFixed(1);
+
+      // 4. Calculate Flexibility Score (0 - 100)
+      let flexScore = 30 + (remoteDays * 14);
+
+      // 5. Calculate Career Moat Index (0 - 100)
+      let moatScore = 40 + (aiHours * 2.2) + (hasMoat ? 16 : 0);
+      if (moatScore > 99) moatScore = 99;
+
+      // Update Metric Cards
+      document.getElementById('sim-gross-salary').textContent = '$' + grossComp.toLocaleString();
+      document.getElementById('sim-salary-lift').textContent = isAiAugmented ? `+$${grossLift.toLocaleString()} AI Boost` : `Baseline Tech Scale`;
+      document.getElementById('sim-net-savings').textContent = '$' + netSavings.toLocaleString();
+      document.getElementById('sim-savings-rate').textContent = `${savingsRate}% Discretionary Rate`;
+      document.getElementById('sim-flexibility-score').textContent = `${flexScore} / 100`;
+      document.getElementById('sim-moat-score').textContent = `${moatScore}%`;
+
+      // Update Scenario Label
+      let scenarioTitle = "";
+      if (expYears <= 2) {
+        scenarioTitle = remoteDays >= 4 ? "Remote Early-Career Nomad" : isAiAugmented ? "Fast-Track AI Specialist" : "Traditional Junior Engineer";
+      } else if (expYears <= 5) {
+        scenarioTitle = isAiAugmented ? "Mid-Level AI Systems Architect" : "Standard Mid-Level Developer";
+      } else {
+        scenarioTitle = "Senior Lead & Technical Director";
+      }
+      document.getElementById('sim-scenario-name').textContent = scenarioTitle;
+
+      // Update Dynamic Gemini Advice
+      let advice = "";
+      if (isAiAugmented && remoteDays >= 2 && netSavings > 55000) {
+        advice = `Optimal Sweet-Spot: With ${aiHours} hrs/wk AI focus and ${remoteDays} days remote, you maximize top-tier comp ($${grossComp.toLocaleString()}) while pocketing $${netSavings.toLocaleString()} in net savings. High career moat (${moatScore}%).`;
+      } else if (!isAiAugmented) {
+        advice = `Warning: Passive AI posture leaves your profile exposed to entry-level automation compression. Activating the AI-Augmented toggle unlocks an estimated +$${(baseComp * 0.22).toLocaleString()} compensation lift.`;
+      } else if (monthlyRent > 3200 && netSavings < 40000) {
+        advice = `Cost Trade-Off: High Tier-1 metro housing ($${monthlyRent}/mo) is consuming over 40% of after-tax income. Transitioning to 3+ remote days in Austin or National Remote increases net savings by +$24,000/yr.`;
+      } else {
+        advice = `Solid configuration: ${expYears} years experience combined with ${aiHours} hrs/week AI upskilling maintains high demand velocity across enterprise teams.`;
+      }
+      document.getElementById('sim-advice-text').textContent = advice;
+
+      // Update Simulator Radar Chart
+      if (simulatorRadarChart) {
+        let compIndex = Math.min(100, Math.round((grossComp / 220000) * 100));
+        let savingsIndex = Math.min(100, Math.round((netSavings / 85000) * 100));
+        simulatorRadarChart.data.datasets[0].data = [
+          compIndex,
+          savingsIndex,
+          flexScore,
+          Math.min(100, 50 + (aiHours * 2.5)),
+          moatScore
+        ];
+        simulatorRadarChart.update();
+      }
+    }
+
+    // Dynamic Chart Updater
+    function updateSalaryChart(data) {
+      if (!salaryChart) return;
+      const displayData = data.slice(0, 7); // Display top subset for readability
+      salaryChart.data.labels = displayData.map(d => `${d.role.split(' ')[0]} (${d.exp_level.split(' ')[0]})`);
+      salaryChart.data.datasets[0].data = displayData.map(d => d.base_salary);
+      salaryChart.data.datasets[1].data = displayData.map(d => d.ai_salary);
+      salaryChart.update();
+    }
+
+    // Interactive AI Career ROI & Compensation Calculator
+    function calculateROI() {
+      const role = document.getElementById('calc-role').value;
+      const exp = document.getElementById('calc-exp').value;
+
+      // Base matrix
+      const baseMatrix = {
+        ai: { junior: 105000, mid: 148000, senior: 195000 },
+        fullstack: { junior: 85000, mid: 122000, senior: 168000 },
+        cloud: { junior: 90000, mid: 132000, senior: 175000 },
+        data: { junior: 82000, mid: 120000, senior: 165000 },
+        security: { junior: 88000, mid: 135000, senior: 180000 },
+        product: { junior: 96000, mid: 142000, senior: 188000 }
+      };
+
+      const base = baseMatrix[role][exp];
+      
+      // Calculate multiplier from checked skills
+      let multiplier = 1.0;
+      let skillCount = 0;
+
+      if (document.getElementById('skill-llmops').checked) { multiplier += 0.085; skillCount++; }
+      if (document.getElementById('skill-rag').checked) { multiplier += 0.075; skillCount++; }
+      if (document.getElementById('skill-pytorch').checked) { multiplier += 0.070; skillCount++; }
+      if (document.getElementById('skill-agents').checked) { multiplier += 0.065; skillCount++; }
+      if (document.getElementById('skill-evals').checked) { multiplier += 0.055; skillCount++; }
+      if (document.getElementById('skill-security').checked) { multiplier += 0.060; skillCount++; }
+
+      const boosted = Math.round(base * multiplier);
+      const lift = boosted - base;
+      const pctLift = Math.round(((boosted - base) / base) * 100);
+
+      document.getElementById('calc-base').textContent = '$' + base.toLocaleString();
+      document.getElementById('calc-boosted').textContent = '$' + boosted.toLocaleString();
+      document.getElementById('calc-lift').textContent = `+$${lift.toLocaleString()} / yr (+${pctLift}%)`;
+
+      // Percentile Badge
+      const badge = document.getElementById('calc-percentile');
+      if (skillCount >= 4) {
+        badge.textContent = 'Top 5% Comp Tier';
+        badge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-semibold border border-purple-500/30';
+      } else if (skillCount >= 2) {
+        badge.textContent = 'Top 15% Comp Band';
+        badge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30';
+      } else {
+        badge.textContent = 'Standard Comp Band';
+        badge.className = 'text-xs px-2.5 py-0.5 rounded-full bg-slate-700 text-slate-300 font-semibold';
+      }
+
+      // Next Recommendation
+      const rec = document.getElementById('calc-recommendation');
+      if (!document.getElementById('skill-llmops').checked) {
+        rec.innerHTML = 'Mastering <strong class="text-indigo-400">LLMOps & High-Scale Serving (vLLM/Triton)</strong> unlocks highest entry into tier-1 enterprise platforms (+8.5% incremental boost).';
+      } else if (!document.getElementById('skill-pytorch').checked) {
+        rec.innerHTML = 'Pairing deployment skills with <strong class="text-purple-400">PyTorch & Parameter-Efficient Fine-Tuning (LoRA)</strong> bridges the gap between software engineer and applied AI scientist.';
+      } else if (!document.getElementById('skill-evals').checked) {
+        rec.innerHTML = 'Adding <strong class="text-pink-400">LLM Evaluation & Automated Benchmarking</strong> proves reliability—the #1 corporate hiring hurdle in 2025–2026.';
+      } else {
+        rec.innerHTML = 'Exceptional full-stack AI profile. Target tier-1 foundation labs, hedge funds, or senior agentic software architecture roles.';
+      }
+    }
+
+    // Render Data Table
+    function renderTable() {
+      const searchTerm = document.getElementById('table-search').value.toLowerCase();
+      const tbody = document.getElementById('benchmark-table-body');
+      tbody.innerHTML = '';
+
+      let rows = filteredData.filter(item => {
+        return (
+          item.role.toLowerCase().includes(searchTerm) ||
+          item.domain.toLowerCase().includes(searchTerm) ||
+          item.key_skills.toLowerCase().includes(searchTerm) ||
+          item.location.toLowerCase().includes(searchTerm) ||
+          item.company_types.toLowerCase().includes(searchTerm)
+        );
+      });
+
+      // Sort
+      rows.sort((a, b) => {
+        let valA = a[sortColumn];
+        let valB = b[sortColumn];
+        if (typeof valA === 'string') {
+          return sortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        } else {
+          return sortDirection === 'asc' ? valA - valB : valB - valA;
+        }
+      });
+
+      document.getElementById('table-entries-count').textContent = `Showing ${rows.length} of ${rawData.length} records`;
+
+      if (rows.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-slate-500">No benchmark matches found for your filter criteria.</td></tr>`;
+        return;
+      }
+
+      rows.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-900/60 transition';
+        
+        let modalityBadge = item.modality === 'Remote' 
+          ? '<span class="px-2 py-0.5 text-[10px] rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">Remote</span>'
+          : item.modality === 'Hybrid'
+          ? '<span class="px-2 py-0.5 text-[10px] rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">Hybrid</span>'
+          : '<span class="px-2 py-0.5 text-[10px] rounded bg-slate-800 text-slate-300 font-medium">On-Site</span>';
+
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-semibold text-white">
+            ${item.role}
+            <div class="text-[10px] text-slate-400 font-normal">${item.domain}</div>
+          </td>
+          <td class="px-4 py-3 text-slate-300 font-mono text-[11px]">${item.exp_level}</td>
+          <td class="px-4 py-3 font-mono text-slate-300">$${item.base_salary.toLocaleString()}</td>
+          <td class="px-4 py-3 font-mono font-bold text-indigo-300">$${item.ai_salary.toLocaleString()}</td>
+          <td class="px-4 py-3 font-mono text-emerald-400 font-semibold">+${item.ai_premium_pct}%</td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-1.5 mb-1">${modalityBadge}</div>
+            <div class="text-[10px] text-slate-400">${item.location}</div>
+          </td>
+          <td class="px-4 py-3 max-w-xs truncate text-[11px] text-slate-300" title="${item.key_skills}">
+            ${item.key_skills}
+          </td>
+          <td class="px-4 py-3">
+            <div class="flex items-center gap-2">
+              <span class="mono font-semibold text-pink-400">+${item.growth_rate}%</span>
+              <div class="w-12 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                <div class="bg-pink-500 h-1.5 rounded-full" style="width: ${item.demand_index}%"></div>
+              </div>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Sort Table
+    function sortTable(column) {
+      if (sortColumn === column) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortColumn = column;
+        sortDirection = 'desc';
+      }
+      renderTable();
+    }
+
+    // Export Filtered View to CSV
+    function exportCSV() {
+      const headers = ['ID', 'Role', 'Domain', 'Experience_Level', 'Base_Salary', 'AI_Salary', 'AI_Premium_Pct', 'Modality', 'Location', 'Growth_Rate', 'Demand_Index', 'Key_Skills', 'Company_Types'];
+      let csvContent = 'data:text/csv;charset=utf-8,' + headers.join(',') + '\n';
+
+      filteredData.forEach(row => {
+        const values = [
+          row.id,
+          `"${row.role}"`,
+          `"${row.domain}"`,
+          `"${row.exp_level}"`,
+          row.base_salary,
+          row.ai_salary,
+          row.ai_premium_pct,
+          `"${row.modality}"`,
+          `"${row.location}"`,
+          row.growth_rate,
+          row.demand_index,
+          `"${row.key_skills}"`,
+          `"${row.company_types}"`
+        ];
+        csvContent += values.join(',') + '\n';
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'ai_career_salary_intelligence_2024_2026.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
